@@ -32,7 +32,8 @@ public class PaymentController {
     }
 
     // Create a new payment
-    @PostMapping
+    @PostMapping("/create")
+    @CrossOrigin(origins = "http://localhost:3000")
     public Payment createPayment(@RequestBody Payment payment) {
         return paymentService.createPayment(payment); // Delegate to service for creating the payment
     }

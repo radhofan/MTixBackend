@@ -13,6 +13,10 @@ public abstract class Tiket {
     @JoinColumn(name = "museum_id", referencedColumnName = "museum_id", nullable = false)
     private Museum museum;
 
+    @ManyToOne
+    @JoinColumn(name = "keranjang_id", referencedColumnName = "keranjang_id", nullable = false) // Foreign key for Keranjang
+    private Keranjang keranjang;
+
 
     public abstract void checkAvailability();
 

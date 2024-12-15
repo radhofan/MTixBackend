@@ -7,40 +7,57 @@ import com.example.MTIXBackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users") // Define base URL for User-related operations
 public class UserController {
 
+    //////////////////////////////////////////////////////// Attributes and Contructors
+    ///
     private final UserService userService;
-    //private final KeranjangService keranjangService;
+    private final KeranjangService keranjangService;
 
-    // Inject UserService into the controller using constructor-based dependency injection
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, KeranjangService keranjangService) {
         this.userService = userService;
+        this.keranjangService = keranjangService;  // Ensure proper initialization
     }
-//    @Autowired
-//    public UserController(UserService userService, KeranjangService keranjangService) {
-//        this.userService = userService;
-//        this.keranjangService = keranjangService;  // Ensure proper initialization
-//    }
 
-    // Endpoint for logging in
+    //////////////////////////////////////////////////////// Business Methods
+    ///
     @PostMapping("/login")
     @CrossOrigin(origins = "http://localhost:3000")
     public User loginUser(@RequestBody User user) {
         User authenticatedUser = userService.authenticateUser(user.getEmail(), user.getPassword());
 
-        if (authenticatedUser != null) {
-            // Return user data or authentication token here (e.g., JWT)
-            return authenticatedUser;
-        } else {
+        if (authenticatedUser == null) {
             throw new RuntimeException("Invalid email or password");
         }
+
+        // Exclude the Keranjang object before returning the User object
+        authenticatedUser.setKeranjang(null);
+        return authenticatedUser;
     }
 
+    // Endpoint to get the Keranjang for a user
+    @GetMapping("/{userId}/getKeranjang")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Keranjang getKeranjang(@PathVariable int userId) {
+        return userService.getKeranjangForUser(userId); // Call the service to get the Keranjang
+    }
+
+    // Endpoint to update the Keranjang for a user
+    @PutMapping("/{userId}/updateKeranjang")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Keranjang updateKeranjang(@PathVariable int userId, @RequestBody Keranjang updatedKeranjang) {
+        return userService.updateKeranjangForUser(userId, updatedKeranjang); // Call the service to update the Keranjang
+    }
+
+    //////////////////////////////////////////////////////// CRUD Methods
+    ///
     // Get all users
     @GetMapping
     public List<User> getAllUsers() {
@@ -57,13 +74,13 @@ public class UserController {
     @PostMapping("/create")
     @CrossOrigin(origins = "http://localhost:3000")
     public User createUser(@RequestBody User user) {
-//        // First create the Keranjang
-//        Keranjang newKeranjang = new Keranjang();
-//        // Set fields for Keranjang if needed (do not set keranjang_id, let it auto-generate)
-//        newKeranjang = keranjangService.createKeranjang(newKeranjang); // Now correctly use the instance
-//
-//        // Set the keranjang_id in the user object
-//        user.setKeranjang(newKeranjang); // Assuming a one-to-one or many-to-one relationship
+        // First create the Keranjang
+        Keranjang newKeranjang = new Keranjang();
+        // Set fields for Keranjang if needed (do not set keranjang_id, let it auto-generate)
+        newKeranjang = keranjangService.createKeranjang(newKeranjang); // Now correctly use the instance
+
+        // Set the keranjang_id in the user object
+        user.setKeranjang(newKeranjang); // Assuming a one-to-one or many-to-one relationship
 
         // Now create the user with the keranjang_id
         return userService.createUser(user);

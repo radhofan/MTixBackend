@@ -12,14 +12,13 @@ public class Keranjang {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate user_id
     private int keranjang_id;
-
-//    @OneToOne
-//    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
-//    private User user;
-
-    private List<Integer> tiket_id;
     private double total_harga;
     private int jumlah_tiket;
+    private String jenis_tiket;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "museum_id", unique = false)  // Disable uniqueness
+    private Museum museum;
 
     public void addTiket(){
 
@@ -41,13 +40,6 @@ public class Keranjang {
         this.keranjang_id = keranjang_id;
     }
 
-    public List<Integer> getTiket_id() {
-        return tiket_id;
-    }
-
-    public void setTiket_id(List<Integer> tiket_id) {
-        this.tiket_id = tiket_id;
-    }
 
     public double getTotal_harga() {
         return total_harga;
@@ -57,11 +49,27 @@ public class Keranjang {
         this.total_harga = total_harga;
     }
 
+    public String getJenis_tiket() {
+        return jenis_tiket;
+    }
+
+    public void setJenis_tiket(String jenis_tiket) {
+        this.jenis_tiket = jenis_tiket;
+    }
+
     public int getJumlah_tiket() {
         return jumlah_tiket;
     }
 
     public void setJumlah_tiket(int jumlah_tiket) {
         this.jumlah_tiket = jumlah_tiket;
+    }
+
+    public Museum getMuseum() {
+        return museum;
+    }
+
+    public void setMuseum(Museum museum) {
+        this.museum = museum;
     }
 }

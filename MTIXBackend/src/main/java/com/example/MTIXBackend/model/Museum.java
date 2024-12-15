@@ -17,18 +17,21 @@ public class Museum {
     private String no_telpon;
     private String keterangan;
     private double rating;
-
-    @OneToMany(mappedBy = "museum")
-    private List<TiketReguler> tiketRegulerList;
-
-    @OneToMany(mappedBy = "museum")
-    private List<TiketKeluarga> tiketKeluargaList;
-
-    @OneToMany(mappedBy = "museum")
-    private List<TiketPelajar> tiketPelajarList;
-
-    private List<Integer> ratingList;
     private int jumlah_tiket;
+    private int tiketReguler_price;
+    private int tiketPelajar_price;
+    private int tiketKeluarga_price;
+
+//    @OneToMany(mappedBy = "museum")
+//    private List<TiketReguler> tiketRegulerList;
+//
+//    @OneToMany(mappedBy = "museum")
+//    private List<TiketKeluarga> tiketKeluargaList;
+//
+//    @OneToMany(mappedBy = "museum")
+//    private List<TiketPelajar> tiketPelajarList;
+//
+//    private List<Integer> ratingList;
 
     public void viewDetails(){
 
@@ -58,9 +61,6 @@ public class Museum {
         return lokasi;
     }
 
-    public List<Integer> getRatingList() {
-        return ratingList;
-    }
 
     public int getJumlah_tiket() {
         return jumlah_tiket;
@@ -70,9 +70,6 @@ public class Museum {
         this.jumlah_tiket = jumlah_tiket;
     }
 
-    public void setRatingList(List<Integer> ratingList) {
-        this.ratingList = ratingList;
-    }
 
     public void setLokasi(String lokasi) {
         this.lokasi = lokasi;
@@ -100,5 +97,29 @@ public class Museum {
 
     public void setNo_telpon(String no_telpon) {
         this.no_telpon = no_telpon;
+    }
+
+    public int getTiketReguler_price() {
+        return tiketReguler_price;
+    }
+
+    public void setTiketReguler_price(int tiketReguler_price) {
+        this.tiketReguler_price = tiketReguler_price;
+    }
+
+    public int getTiketPelajar_price() {
+        return tiketPelajar_price;
+    }
+
+    public void setTiketPelajar_price(int tiketPelajar_price) {
+        this.tiketPelajar_price = tiketPelajar_price;
+    }
+
+    public int getTiketKeluarga_price() {
+        return tiketKeluarga_price;
+    }
+
+    public void setTiketKeluarga_price(int tiketKeluarga_price) {
+        this.tiketKeluarga_price = tiketKeluarga_price;
     }
 }

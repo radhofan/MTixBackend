@@ -27,6 +27,7 @@ public class KeranjangController {
 
     // Get a keranjang by ID
     @GetMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public Keranjang getKeranjangById(@PathVariable int id) {
         return keranjangService.getKeranjangById(id); // Get keranjang by ID
     }
@@ -39,6 +40,7 @@ public class KeranjangController {
 
     // Update a keranjang
     @PutMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public Keranjang updateKeranjang(@RequestBody Keranjang keranjang) {
         return keranjangService.updateKeranjang(keranjang); // Update the keranjang
     }

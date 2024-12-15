@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "user") // Optional, customize table name if needed
 public class User {
 
+    //////////////////////////////////////////////////////// Attributes
+    ///
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate user_id
     private int user_id;
@@ -16,19 +18,14 @@ public class User {
     private String password;
     private String email;
 
-//    @OneToOne
-//    @JoinColumn(name = "keranjang_id", referencedColumnName = "keranjang_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "keranjang_id")
+    private Keranjang keranjang;
 
-//    @OneToOne(cascade = CascadeType.ALL)  // Cascade save operation to Keranjang
-//    @JoinColumn(name = "keranjang_id")
-      //private Keranjang keranjang;
-
-      //private int keranjang_id
-
-
-    // Business Methods
-    public void viewKeranjang() {
-
+    //////////////////////////////////////////////////////// Business Methods
+    ///
+    public Keranjang viewKeranjang() {
+        return this.keranjang;  // Return the associated Keranjang object
     }
 
     public void checkout() {
@@ -39,11 +36,8 @@ public class User {
 
     }
 
-//    public void setKeranjang(Keranjang keranjang){
-//        this.keranjang = keranjang;
-//    }
-
-    // Getter and Setter Methods
+    //////////////////////////////////////////////////////// Getter and Setter Methods
+    ///
     public int getUser_id() {
         return user_id;
     }
@@ -91,4 +85,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void setKeranjang(Keranjang keranjang){
+        this.keranjang = keranjang;
+    }
+
+    public Keranjang getKeranjang() {
+        return keranjang;
+    }
+
 }
