@@ -13,9 +13,9 @@ public class Keranjang {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate user_id
     private int keranjang_id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
-    private User user;
+//    @OneToOne
+//    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+//    private User user;
 
     private List<Integer> tiket_id;
     private double total_harga;

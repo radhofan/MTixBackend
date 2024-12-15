@@ -38,4 +38,13 @@ public class UserService {
     public void deleteUser(int id) {
         userRepository.deleteById(id); // Delete the user by ID
     }
+
+    // Method to authenticate user based on email and password
+    public User authenticateUser(String email, String password) {
+        User user = userRepository.findByEmail(email);  // Assuming you have a method in your repository to find user by email
+        if (user != null && user.getPassword().equals(password)) {  // Simple password check (consider hashing in production)
+            return user;
+        }
+        return null; // Return null if credentials don't match
+    }
 }

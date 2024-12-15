@@ -13,10 +13,17 @@ public class User {
     private String nama;
     private String no_telpon;
     private String alamat;
+    private String password;
+    private String email;
 
-    @OneToOne
-    @JoinColumn(name = "keranjang_id", referencedColumnName = "keranjang_id", nullable = false)
-    private Keranjang keranjang;
+//    @OneToOne
+//    @JoinColumn(name = "keranjang_id", referencedColumnName = "keranjang_id", nullable = false)
+
+//    @OneToOne(cascade = CascadeType.ALL)  // Cascade save operation to Keranjang
+//    @JoinColumn(name = "keranjang_id")
+      private Keranjang keranjang;
+
+      private int keranjang_id
 
 
     // Business Methods
@@ -31,6 +38,10 @@ public class User {
     public void viewHistory() {
 
     }
+
+//    public void setKeranjang(Keranjang keranjang){
+//        this.keranjang = keranjang;
+//    }
 
     // Getter and Setter Methods
     public int getUser_id() {
@@ -65,4 +76,19 @@ public class User {
         this.alamat = alamat;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

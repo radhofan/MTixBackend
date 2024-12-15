@@ -1,5 +1,7 @@
 package com.example.MTIXBackend.controller;
 
+import com.example.MTIXBackend.model.Keranjang;
+import com.example.MTIXBackend.service.KeranjangService;
 import com.example.MTIXBackend.model.User;
 import com.example.MTIXBackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,31 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    //private final KeranjangService keranjangService;
 
     // Inject UserService into the controller using constructor-based dependency injection
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+//    @Autowired
+//    public UserController(UserService userService, KeranjangService keranjangService) {
+//        this.userService = userService;
+//        this.keranjangService = keranjangService;  // Ensure proper initialization
+//    }
+
+    // Endpoint for logging in
+    @PostMapping("/login")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public User loginUser(@RequestBody User user) {
+        User authenticatedUser = userService.authenticateUser(user.getEmail(), user.getPassword());
+
+        if (authenticatedUser != null) {
+            // Return user data or authentication token here (e.g., JWT)
+            return authenticatedUser;
+        } else {
+            throw new RuntimeException("Invalid email or password");
+        }
     }
 
     // Get all users
@@ -32,9 +54,19 @@ public class UserController {
     }
 
     // Create a new user
-    @PostMapping
+    @PostMapping("/create")
+    @CrossOrigin(origins = "http://localhost:3000")
     public User createUser(@RequestBody User user) {
-        return userService.createUser(user); // Delegate to service for creating the user
+//        // First create the Keranjang
+//        Keranjang newKeranjang = new Keranjang();
+//        // Set fields for Keranjang if needed (do not set keranjang_id, let it auto-generate)
+//        newKeranjang = keranjangService.createKeranjang(newKeranjang); // Now correctly use the instance
+//
+//        // Set the keranjang_id in the user object
+//        user.setKeranjang(newKeranjang); // Assuming a one-to-one or many-to-one relationship
+
+        // Now create the user with the keranjang_id
+        return userService.createUser(user);
     }
 
     // Update a user by ID
