@@ -21,9 +21,9 @@ public class User {
 
 //    @OneToOne(cascade = CascadeType.ALL)  // Cascade save operation to Keranjang
 //    @JoinColumn(name = "keranjang_id")
-      private Keranjang keranjang;
+      //private Keranjang keranjang;
 
-      private int keranjang_id
+      //private int keranjang_id
 
 
     // Business Methods
