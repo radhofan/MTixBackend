@@ -16,7 +16,7 @@ public class Keranjang {
     private int jumlah_tiket;
     private String jenis_tiket;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "museum_id", unique = false)  // Disable uniqueness
     private Museum museum;
 

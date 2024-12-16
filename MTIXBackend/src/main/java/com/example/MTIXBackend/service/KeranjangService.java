@@ -1,7 +1,9 @@
 package com.example.MTIXBackend.service;
 
 import com.example.MTIXBackend.model.Keranjang;
+import com.example.MTIXBackend.model.Museum;
 import com.example.MTIXBackend.repository.KeranjangRepository;
+import com.example.MTIXBackend.repository.MuseumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import java.util.Optional;
 public class KeranjangService {
 
     private final KeranjangRepository keranjangRepository;
+    @Autowired
+    private MuseumRepository museumRepository;
 
     @Autowired
     public KeranjangService(KeranjangRepository keranjangRepository) {
@@ -28,7 +32,16 @@ public class KeranjangService {
     }
 
     public Keranjang createKeranjang(Keranjang keranjang) {
-        return keranjangRepository.save(keranjang); // Save the new user to the database
+        if (keranjang.getMuseum() == null) {
+            // Fetch the default Museum from the database
+            Museum defaultMuseum = museumRepository.findById(1).orElseThrow(() ->
+                    new RuntimeException("Default Museum not found!")
+            );
+            keranjang.setMuseum(defaultMuseum);
+        }
+
+        // Save the Keranjang object to the database
+        return keranjangRepository.save(keranjang);
     }
 
     public Keranjang updateKeranjang(Keranjang keranjang) {
