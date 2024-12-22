@@ -2,6 +2,7 @@ package com.example.MTIXBackend.controller;
 
 import com.example.MTIXBackend.model.Keranjang;
 import com.example.MTIXBackend.service.KeranjangService;
+import com.example.MTIXBackend.controller.KeranjangController;
 import com.example.MTIXBackend.model.User;
 import com.example.MTIXBackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,48 +17,41 @@ import java.util.Map;
 public class UserController {
 
     //////////////////////////////////////////////////////// Attributes and Contructors
-    ///
     private final UserService userService;
-    private final KeranjangService keranjangService;
+    private final KeranjangController keranjangController;
 
     @Autowired
-    public UserController(UserService userService, KeranjangService keranjangService) {
+    public UserController(UserService userService, KeranjangController keranjangController) {
         this.userService = userService;
-        this.keranjangService = keranjangService;  // Ensure proper initialization
+        this.keranjangController = keranjangController;  // Ensure proper initialization
     }
 
     //////////////////////////////////////////////////////// Business Methods
-    ///
+    @PostMapping("/registrasi")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public User registrasi(@RequestBody User user) {
+        Keranjang newKeranjang = new Keranjang();
+        newKeranjang = keranjangController.createKeranjangUser(newKeranjang);
+
+        user.setKeranjang(newKeranjang);
+
+        return userService.createUser(user);
+    }
+
     @PostMapping("/login")
     @CrossOrigin(origins = "http://localhost:3000")
-    public User loginUser(@RequestBody User user) {
+    public User login(@RequestBody User user) {
         User authenticatedUser = userService.authenticateUser(user.getEmail(), user.getPassword());
 
         if (authenticatedUser == null) {
             throw new RuntimeException("Invalid email or password");
         }
 
-        // Exclude the Keranjang object before returning the User object
         authenticatedUser.setKeranjang(null);
         return authenticatedUser;
     }
 
-    // Endpoint to get the Keranjang for a user
-    @GetMapping("/{userId}/getKeranjang")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public Keranjang getKeranjang(@PathVariable int userId) {
-        return userService.getKeranjangForUser(userId); // Call the service to get the Keranjang
-    }
-
-    // Endpoint to update the Keranjang for a user
-    @PutMapping("/{userId}/updateKeranjang")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public Keranjang updateKeranjang(@PathVariable int userId, @RequestBody Keranjang updatedKeranjang) {
-        return userService.updateKeranjangForUser(userId, updatedKeranjang); // Call the service to update the Keranjang
-    }
-
     //////////////////////////////////////////////////////// CRUD Methods
-    ///
     // Get all users
     @GetMapping
     public List<User> getAllUsers() {
@@ -77,7 +71,7 @@ public class UserController {
         // First create the Keranjang
         Keranjang newKeranjang = new Keranjang();
         // Set fields for Keranjang if needed (do not set keranjang_id, let it auto-generate)
-        newKeranjang = keranjangService.createKeranjang(newKeranjang); // Now correctly use the instance
+        newKeranjang = keranjangController.createKeranjang(newKeranjang); // Now correctly use the instance
 
         // Set the keranjang_id in the user object
         user.setKeranjang(newKeranjang); // Assuming a one-to-one or many-to-one relationship

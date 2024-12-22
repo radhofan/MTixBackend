@@ -11,14 +11,34 @@ import java.util.List;
 @RequestMapping("/keranjangs") // Define base URL for Keranjang-related operations
 public class KeranjangController {
 
+    //////////////////////////////////////////////////////// Attributes and Contructors
     private final KeranjangService keranjangService;
 
-    // Inject KeranjangService into the controller using constructor-based dependency injection
     @Autowired
     public KeranjangController(KeranjangService keranjangService) {
         this.keranjangService = keranjangService;
     }
 
+    //////////////////////////////////////////////////////// Business Methods
+    @PostMapping("/createKeranjang")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Keranjang createKeranjangUser(@RequestBody Keranjang keranjang) {
+        return keranjangService.createKeranjang(keranjang);
+    }
+
+    @GetMapping("/getKeranjang/{userId}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Keranjang getKeranjangUser(@PathVariable int userId) {
+        return keranjangService.getKeranjangForUser(userId); // Call the service to get the Keranjang
+    }
+
+    @PutMapping("/updateKeranjang/{userId}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Keranjang updateKeranjangUser(@PathVariable int userId, @RequestBody Keranjang updatedKeranjang) {
+        return keranjangService.updateKeranjangForUser(userId, updatedKeranjang); // Call the service to update the Keranjang
+    }
+
+    //////////////////////////////////////////////////////// CRUD Methods
     // Get all keranjangs
     @GetMapping
     public List<Keranjang> getAllKeranjangs() {
@@ -35,7 +55,7 @@ public class KeranjangController {
     // Create a new keranjang
     @PostMapping
     public Keranjang createKeranjang(@RequestBody Keranjang keranjang) {
-        return keranjangService.createKeranjang(keranjang); // Delegate to service for creating the keranjang
+        return keranjangService.createKeranjang(keranjang);
     }
 
     // Update a keranjang

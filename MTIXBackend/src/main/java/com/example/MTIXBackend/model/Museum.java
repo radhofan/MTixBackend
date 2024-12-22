@@ -8,6 +8,7 @@ import java.util.List;
 @Table(name = "museum")
 public class Museum {
 
+    //////////////////////////////////////////////////////// Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate user_id
     private int museum_id;
@@ -22,17 +23,7 @@ public class Museum {
     private int tiketPelajar_price;
     private int tiketKeluarga_price;
 
-//    @OneToMany(mappedBy = "museum")
-//    private List<TiketReguler> tiketRegulerList;
-//
-//    @OneToMany(mappedBy = "museum")
-//    private List<TiketKeluarga> tiketKeluargaList;
-//
-//    @OneToMany(mappedBy = "museum")
-//    private List<TiketPelajar> tiketPelajarList;
-//
-//    private List<Integer> ratingList;
-
+    //////////////////////////////////////////////////////// Business Methods
     public void viewDetails(){
 
     }
@@ -41,6 +32,7 @@ public class Museum {
 
     }
 
+    //////////////////////////////////////////////////////// Getter and Setter Methods
     public int getMuseum_id() {
         return museum_id;
     }
@@ -61,7 +53,6 @@ public class Museum {
         return lokasi;
     }
 
-
     public int getJumlah_tiket() {
         return jumlah_tiket;
     }
@@ -69,7 +60,6 @@ public class Museum {
     public void setJumlah_tiket(int jumlah_tiket) {
         this.jumlah_tiket = jumlah_tiket;
     }
-
 
     public void setLokasi(String lokasi) {
         this.lokasi = lokasi;
@@ -99,27 +89,15 @@ public class Museum {
         this.no_telpon = no_telpon;
     }
 
-    public int getTiketReguler_price() {
-        return tiketReguler_price;
-    }
+    public int getTiketReguler_price() {return tiketReguler_price;}
 
-    public void setTiketReguler_price(int tiketReguler_price) {
-        this.tiketReguler_price = tiketReguler_price;
-    }
+    public void setTiketReguler_price(int tiketReguler_price) {this.tiketReguler_price = tiketReguler_price;}
 
-    public int getTiketPelajar_price() {
-        return tiketPelajar_price;
-    }
+    public int getTiketPelajar_price() {return tiketPelajar_price;}
 
-    public void setTiketPelajar_price(int tiketPelajar_price) {
-        this.tiketPelajar_price = tiketPelajar_price;
-    }
+    public void setTiketPelajar_price(int tiketPelajar_price) {this.tiketPelajar_price = tiketPelajar_price;}
 
-    public int getTiketKeluarga_price() {
-        return tiketKeluarga_price;
-    }
+    public int getTiketKeluarga_price() {return tiketKeluarga_price;}
 
-    public void setTiketKeluarga_price(int tiketKeluarga_price) {
-        this.tiketKeluarga_price = tiketKeluarga_price;
-    }
+    public void setTiketKeluarga_price(int tiketKeluarga_price) {this.tiketKeluarga_price = tiketKeluarga_price;}
 }

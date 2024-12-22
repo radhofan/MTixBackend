@@ -4,6 +4,7 @@ import com.example.MTIXBackend.model.TiketKeluarga;
 import com.example.MTIXBackend.repository.TiketKeluargaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,13 +12,27 @@ import java.util.Optional;
 @Service
 public class TiketKeluargaService {
 
+    //////////////////////////////////////////////////////// Attributes
     private final TiketKeluargaRepository tiketKeluargaRepository;
+    private final MuseumService museumService;
 
     @Autowired
-    public TiketKeluargaService(TiketKeluargaRepository tiketKeluargaRepository) {
+    public TiketKeluargaService(MuseumService museumService, TiketKeluargaRepository tiketKeluargaRepository) {
+        this.museumService = museumService;
         this.tiketKeluargaRepository = tiketKeluargaRepository;
     }
 
+    //////////////////////////////////////////////////////// Continued Business Methods
+    public TiketKeluarga createTiket(String nama_keluarga, int jumlah_orang, TiketKeluarga tiketKeluarga) {
+        tiketKeluarga.setGroupName(nama_keluarga);
+        tiketKeluarga.setGroupCount(jumlah_orang);
+        tiketKeluarga.setMuseum(
+                museumService.getMuseumById(tiketKeluarga.getKeranjang().getMuseum().getMuseum_id())
+        );
+        return tiketKeluargaRepository.save(tiketKeluarga);
+    }
+
+    //////////////////////////////////////////////////////// CRUD Methods
     public List<TiketKeluarga> getAllTiketKeluargas() {
         return tiketKeluargaRepository.findAll();
     }

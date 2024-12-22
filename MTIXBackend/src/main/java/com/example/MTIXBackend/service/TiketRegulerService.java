@@ -1,5 +1,6 @@
 package com.example.MTIXBackend.service;
 
+import com.example.MTIXBackend.model.TiketPelajar;
 import com.example.MTIXBackend.model.TiketReguler;
 import com.example.MTIXBackend.repository.TiketRegulerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,25 @@ import java.util.Optional;
 @Service
 public class TiketRegulerService {
 
+    //////////////////////////////////////////////////////// Attributes
     private final TiketRegulerRepository tiketRegulerRepository;
+    private final MuseumService museumService;
 
     @Autowired
-    public TiketRegulerService(TiketRegulerRepository tiketRegulerRepository) {
+    public TiketRegulerService(TiketRegulerRepository tiketRegulerRepository, MuseumService museumService) {
         this.tiketRegulerRepository = tiketRegulerRepository;
+        this.museumService = museumService;
     }
 
+    //////////////////////////////////////////////////////// Business Methods
+    public TiketReguler createTiket(TiketReguler tiketReguler) {
+        tiketReguler.setMuseum(
+                museumService.getMuseumById(tiketReguler.getKeranjang().getMuseum().getMuseum_id())
+        );
+        return tiketRegulerRepository.save(tiketReguler);
+    }
+
+    //////////////////////////////////////////////////////// CRUD Methods
     public List<TiketReguler> getAllTiketRegulers() {
         return tiketRegulerRepository.findAll();
     }

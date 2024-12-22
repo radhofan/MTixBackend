@@ -7,18 +7,9 @@ import jakarta.persistence.*;
 @Table(name = "tiketReguler")
 public class TiketReguler extends Tiket{
 
+    //////////////////////////////////////////////////////// Attributes
 
-    private int harga_tiket = 20;
 
-    public void checkAvailability(){
+    //////////////////////////////////////////////////////// Business Methods
 
-    }
-
-    public void reserveTicket(){
-
-    }
-
-    public void getHargaTiket(){
-
-    }
 }

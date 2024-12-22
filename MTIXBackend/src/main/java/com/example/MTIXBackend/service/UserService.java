@@ -26,8 +26,7 @@ public class UserService {
         this.keranjangRepository = keranjangRepository;
     }
 
-    //////////////////////////////////////////////////////// Business Methods
-    ///
+    //////////////////////////////////////////////////////// Continued Business Methods
     public User authenticateUser(String email, String password) {
         User user = userRepository.findByEmail(email);  // Find user by email
 
@@ -40,36 +39,7 @@ public class UserService {
         throw new RuntimeException("Invalid email or password");  // Throw an exception for invalid credentials
     }
 
-    public Keranjang getKeranjangForUser(int userId) {
-        User user = userRepository.findById(userId).orElse(null); // Find the user by ID
-        if (user != null) {
-            return user.viewKeranjang();  // Call the viewKeranjang method and return the Keranjang object
-        } else {
-            // Handle user not found
-            throw new RuntimeException("User not found with ID: " + userId);
-        }
-    }
-
-    public Keranjang updateKeranjangForUser(int userId, Keranjang updatedKeranjang) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
-
-        // Update the user's Keranjang
-        Keranjang currentKeranjang = user.getKeranjang();
-        if (currentKeranjang != null) {
-            currentKeranjang.setJumlah_tiket(updatedKeranjang.getJumlah_tiket());
-            currentKeranjang.setTotal_harga(updatedKeranjang.getTotal_harga());
-            currentKeranjang.setJenis_tiket(updatedKeranjang.getJenis_tiket());
-            // Add more fields as needed
-            keranjangRepository.save(currentKeranjang); // Save changes
-        } else {
-            throw new RuntimeException("Keranjang not found for user with ID: " + userId);
-        }
-
-        return currentKeranjang; // Return the updated Keranjang
-    }
-
     //////////////////////////////////////////////////////// CRUD Methods
-    ///
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }

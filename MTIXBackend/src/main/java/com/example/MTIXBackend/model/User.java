@@ -7,9 +7,8 @@ import jakarta.persistence.*;
 public class User {
 
     //////////////////////////////////////////////////////// Attributes
-    ///
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate user_id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
 
     private String nama;
@@ -22,12 +21,11 @@ public class User {
     @JoinColumn(name = "keranjang_id")
     private Keranjang keranjang;
 
-    //////////////////////////////////////////////////////// Business Methods
-    ///
     public Keranjang viewKeranjang() {
         return this.keranjang;  // Return the associated Keranjang object
     }
 
+    //////////////////////////////////////////////////////// Business Methods
     public void checkout() {
 
     }
@@ -37,7 +35,6 @@ public class User {
     }
 
     //////////////////////////////////////////////////////// Getter and Setter Methods
-    ///
     public int getUser_id() {
         return user_id;
     }
@@ -70,28 +67,16 @@ public class User {
         this.alamat = alamat;
     }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() { return email; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getPassword() {return password;}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setPassword(String password) {this.password = password;}
 
-    public void setKeranjang(Keranjang keranjang){
-        this.keranjang = keranjang;
-    }
+    public void setKeranjang(Keranjang keranjang){this.keranjang = keranjang;}
 
-    public Keranjang getKeranjang() {
-        return keranjang;
-    }
+    public Keranjang getKeranjang() {return keranjang;}
 
 }

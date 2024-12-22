@@ -11,6 +11,7 @@ import java.util.List;
 @RequestMapping("/payments") // Define base URL for Payment-related operations
 public class PaymentController {
 
+    //////////////////////////////////////////////////////// Attributes and Contructors
     private final PaymentService paymentService;
 
     // Inject PaymentService into the controller using constructor-based dependency injection
@@ -19,6 +20,14 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
+    //////////////////////////////////////////////////////// Business Methods
+    @PostMapping("/createPayment")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Payment createPaymentUser(@RequestBody Payment payment) {
+        return paymentService.createPayment(payment);
+    }
+
+    //////////////////////////////////////////////////////// CRUD Methods
     // Get all payments
     @GetMapping
     public List<Payment> getAllPayments() {

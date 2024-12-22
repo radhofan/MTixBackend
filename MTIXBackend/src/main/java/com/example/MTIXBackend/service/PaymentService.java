@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 public class PaymentService {
 
+    //////////////////////////////////////////////////////// Attributes and Contructors
     private final PaymentRepository paymentRepository;
 
     @Autowired
@@ -18,6 +19,7 @@ public class PaymentService {
         this.paymentRepository = paymentRepository;
     }
 
+    //////////////////////////////////////////////////////// CRUD Methods
     public List<Payment> getAllPayments() {
         return paymentRepository.findAll();
     }

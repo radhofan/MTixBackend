@@ -6,19 +6,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/museums") // Define base URL for Museum-related operations
 public class MuseumController {
 
+    //////////////////////////////////////////////////////// Attributes and Contructors
     private final MuseumService museumService;
 
-    // Inject MuseumService into the controller using constructor-based dependency injection
     @Autowired
     public MuseumController(MuseumService museumService) {
         this.museumService = museumService;
     }
 
+    //////////////////////////////////////////////////////// Business Methods
+    @GetMapping("/getAll")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<Museum> viewAllDetails() {
+        return museumService.getAllMuseums();
+    }
+
+    @PostMapping("/getSpec")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Museum viewSpecDetails(@RequestBody Map<String, Integer> requestBody) {
+        Integer id = requestBody.get("id");
+        return museumService.getMuseumById(id);
+    }
+
+    //////////////////////////////////////////////////////// CRUD Methods
     // Get all museums
     @GetMapping("/get")
     @CrossOrigin(origins = "http://localhost:3000")

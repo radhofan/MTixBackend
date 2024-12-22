@@ -1,5 +1,6 @@
 package com.example.MTIXBackend.controller;
 
+import com.example.MTIXBackend.model.TiketKeluarga;
 import com.example.MTIXBackend.model.TiketPelajar;
 import com.example.MTIXBackend.service.TiketPelajarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import java.util.List;
 @RequestMapping("/tiketpelajars") // Define base URL for TiketPelajar-related operations
 public class TiketPelajarController {
 
+    //////////////////////////////////////////////////////// Attributes
     private final TiketPelajarService tiketPelajarService;
 
     // Inject TiketPelajarService into the controller using constructor-based dependency injection
@@ -19,6 +21,14 @@ public class TiketPelajarController {
         this.tiketPelajarService = tiketPelajarService;
     }
 
+    //////////////////////////////////////////////////////// Business Methods
+    @PostMapping("/createTicket/{nama_sekolah}/{jumlah_orang}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public TiketPelajar createTiket(@PathVariable String nama_sekolah, @PathVariable int jumlah_orang, @RequestBody TiketPelajar tiketPelajar) {
+        return tiketPelajarService.createTiket(nama_sekolah, jumlah_orang, tiketPelajar);
+    }
+
+    //////////////////////////////////////////////////////// CRUD Methods
     // Get all tiketpelajars
     @GetMapping
     public List<TiketPelajar> getAllTiketPelajars() {

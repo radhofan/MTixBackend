@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "keranjang")
 public class Keranjang {
 
-
+    //////////////////////////////////////////////////////// Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate user_id
     private int keranjang_id;
@@ -20,6 +20,7 @@ public class Keranjang {
     @JoinColumn(name = "museum_id", unique = false)  // Disable uniqueness
     private Museum museum;
 
+    //////////////////////////////////////////////////////// Business Methods
     public void addTiket(){
 
     }
@@ -32,6 +33,7 @@ public class Keranjang {
 
     }
 
+    //////////////////////////////////////////////////////// Getter and Setter Methods
     public int getKeranjang_id() {
         return keranjang_id;
     }
@@ -39,7 +41,6 @@ public class Keranjang {
     public void setKeranjang_id(int keranjang_id) {
         this.keranjang_id = keranjang_id;
     }
-
 
     public double getTotal_harga() {
         return total_harga;
