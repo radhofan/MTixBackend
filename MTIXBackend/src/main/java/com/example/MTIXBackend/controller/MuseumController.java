@@ -12,7 +12,7 @@ import java.util.Map;
 @RequestMapping("/museums") // Define base URL for Museum-related operations
 public class MuseumController {
 
-    //////////////////////////////////////////////////////// Attributes and Contructors
+    /// ///////////////////////////////////////////////////// Attributes and Contructors
     private final MuseumService museumService;
 
     @Autowired

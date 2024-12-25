@@ -21,14 +21,15 @@ public class KeranjangService {
     //////////////////////////////////////////////////////// Attributes and Contructors
     @Autowired
     private MuseumController museumController;
-    private MuseumRepository museumRepository;
+    private final MuseumRepository museumRepository;
     private final KeranjangRepository keranjangRepository;
     private final UserRepository userRepository;
 
     @Autowired
-    public KeranjangService(KeranjangRepository keranjangRepository, UserRepository userRepository) {
+    public KeranjangService(KeranjangRepository keranjangRepository, UserRepository userRepository, MuseumRepository museumRepository) {
         this.keranjangRepository = keranjangRepository;
         this.userRepository = userRepository;
+        this.museumRepository = museumRepository;
     }
 
     //////////////////////////////////////////////////////// Continued Business Methods
@@ -55,12 +56,12 @@ public class KeranjangService {
             Museum museum = museumController.viewSpecDetails(requestBody);
             double price = 0;
             if(currentKeranjang.getJenis_tiket().equals("Tiket Reguler")){
-                price = museum.getTiketReguler_price();
+                price = museum.getTiket_reguler_price();
             }else if(currentKeranjang.getJenis_tiket().equals("Tiket Pelajar")){
-                price = museum.getTiketPelajar_price();
+                price = museum.getTiket_pelajar_price();
             }
             else if(currentKeranjang.getJenis_tiket().equals("Tiket Keluarga")){
-                price = museum.getTiketKeluarga_price();
+                price = museum.getTiket_keluarga_price();
             }
             currentKeranjang.setTotal_harga(currentKeranjang.getJumlah_tiket() * price);
             keranjangRepository.save(currentKeranjang);
@@ -82,14 +83,12 @@ public class KeranjangService {
 
     public Keranjang createKeranjang(Keranjang keranjang) {
         if (keranjang.getMuseum() == null) {
-            // Fetch the default Museum from the database
             Museum defaultMuseum = museumRepository.findById(1).orElseThrow(() ->
                     new RuntimeException("Default Museum not found!")
             );
             keranjang.setMuseum(defaultMuseum);
         }
 
-        // Save the Keranjang object to the database
         return keranjangRepository.save(keranjang);
     }
 

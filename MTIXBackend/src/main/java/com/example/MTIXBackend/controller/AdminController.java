@@ -1,7 +1,9 @@
 package com.example.MTIXBackend.controller;
 
 import com.example.MTIXBackend.model.Admin;
+import com.example.MTIXBackend.model.Museum;
 import com.example.MTIXBackend.service.AdminService;
+import com.example.MTIXBackend.service.MuseumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,15 +13,39 @@ import java.util.List;
 @RequestMapping("/admins") // Define base URL for Admin-related operations
 public class AdminController {
 
+    //////////////////////////////////////////////////////// Attributes and Contructors
     private final AdminService adminService;
+    private final MuseumService museumService;
 
-    // Inject AdminService into the controller using constructor-based dependency injection
     @Autowired
-    public AdminController(AdminService adminService) {
+    public AdminController(AdminService adminService, MuseumService museumService) {
         this.adminService = adminService;
+        this.museumService = museumService;
     }
 
-    // Get all admins
+    //////////////////////////////////////////////////////// Business Methods
+    // Create a new museum
+    @PostMapping("/AddMuseum")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Museum AddMuseum(@RequestBody Museum museum) {
+        return museumService.createMuseum(museum);
+    }
+
+    // Edit a museum
+    @PostMapping("/EditMuseum")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Museum EditMuseum(@RequestBody Museum museum) {
+        return museumService.updateMuseum(museum);
+    }
+
+    // Delete a museum (fix by using DELETE method)
+    @DeleteMapping("/DeleteMuseum/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public void deleteMuseum(@PathVariable int id) {
+        museumService.deleteMuseum(id);
+    }
+
+    //////////////////////////////////////////////////////// CRUD Methods
     @GetMapping
     public List<Admin> getAllAdmins() {
         return adminService.getAllAdmins(); // Delegate to the service layer
