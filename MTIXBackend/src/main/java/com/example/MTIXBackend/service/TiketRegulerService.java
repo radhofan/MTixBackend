@@ -27,6 +27,7 @@ public class TiketRegulerService {
         tiketReguler.setMuseum(
                 museumService.getMuseumById(tiketReguler.getKeranjang().getMuseum().getMuseum_id())
         );
+        tiketReguler.setStatus("Upcoming");
         return tiketRegulerRepository.save(tiketReguler);
     }
 
@@ -46,6 +47,21 @@ public class TiketRegulerService {
 
     public TiketReguler updateTiketReguler(TiketReguler tiketReguler) {
         return tiketRegulerRepository.save(tiketReguler); // Save the updated user to the database
+    }
+
+    // New method to update the status
+    public TiketReguler updateStatus(int id, String newStatus) {
+        TiketReguler tiketReguler = getTiketRegulerById(id);
+        if (tiketReguler != null) {
+            tiketReguler.setStatus(newStatus);
+            return tiketRegulerRepository.save(tiketReguler);
+        }
+        return null; // Return null if ticket not found
+    }
+
+    // Custom method to get TiketReguler by status
+    public List<TiketReguler> getTiketRegulersByStatus(String status) {
+        return tiketRegulerRepository.findByStatus(status);
     }
 
     public void deleteTiketReguler(int id) {

@@ -47,15 +47,21 @@ public class TiketPelajarController {
         return tiketPelajarService.createTiketPelajar(tiketPelajar); // Delegate to service for creating the tiketpelajar
     }
 
+    // Delete a tiketpelajar by ID
+    @DeleteMapping("/{id}")
+    public void deleteTiketPelajar(@PathVariable int id) {
+        tiketPelajarService.deleteTiketPelajar(id); // Delete the tiketpelajar by ID
+    }
+
     // Update a tiketpelajar
     @PutMapping
     public TiketPelajar updateTiketPelajar(@RequestBody TiketPelajar tiketPelajar) {
         return tiketPelajarService.updateTiketPelajar(tiketPelajar); // Update the tiketpelajar
     }
 
-    // Delete a tiketpelajar by ID
-    @DeleteMapping("/{id}")
-    public void deleteTiketPelajar(@PathVariable int id) {
-        tiketPelajarService.deleteTiketPelajar(id); // Delete the tiketpelajar by ID
+    // Endpoint to get TiketPelajar by status
+    @GetMapping("/status/{status}")
+    public List<TiketPelajar> getTiketPelajarsByStatus(@PathVariable String status) {
+        return tiketPelajarService.getTiketPelajarsByStatus(status);
     }
 }

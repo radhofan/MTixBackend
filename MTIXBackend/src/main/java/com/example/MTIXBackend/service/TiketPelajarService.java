@@ -29,6 +29,7 @@ public class TiketPelajarService {
         tiketPelajar.setMuseum(
                 museumService.getMuseumById(tiketPelajar.getKeranjang().getMuseum().getMuseum_id())
         );
+        tiketPelajar.setStatus("Upcoming");
         return tiketPelajarRepository.save(tiketPelajar);
     }
 
@@ -48,6 +49,11 @@ public class TiketPelajarService {
 
     public TiketPelajar updateTiketPelajar(TiketPelajar tiketPelajar) {
         return tiketPelajarRepository.save(tiketPelajar); // Save the updated user to the database
+    }
+
+    // Method to filter TiketPelajar by status
+    public List<TiketPelajar> getTiketPelajarsByStatus(String status) {
+        return tiketPelajarRepository.findByStatus(status);
     }
 
     public void deleteTiketPelajar(int id) {

@@ -29,6 +29,7 @@ public class TiketKeluargaService {
         tiketKeluarga.setMuseum(
                 museumService.getMuseumById(tiketKeluarga.getKeranjang().getMuseum().getMuseum_id())
         );
+        tiketKeluarga.setStatus("Upcoming");
         return tiketKeluargaRepository.save(tiketKeluarga);
     }
 
@@ -48,6 +49,20 @@ public class TiketKeluargaService {
 
     public TiketKeluarga updateTiketKeluarga(TiketKeluarga tiketKeluarga) {
         return tiketKeluargaRepository.save(tiketKeluarga); // Save the updated user to the database
+    }
+
+    public TiketKeluarga updateStatus(int id, String newStatus) {
+        TiketKeluarga tiketKeluarga = getTiketKeluargaById(id);
+        if (tiketKeluarga != null) {
+            tiketKeluarga.setStatus(newStatus);
+            return tiketKeluargaRepository.save(tiketKeluarga);
+        }
+        return null; // Handle case where ticket is not found
+    }
+
+    // Get tickets by status
+    public List<TiketKeluarga> getTicketsByStatus(String status) {
+        return tiketKeluargaRepository.findByStatus(status);
     }
 
     public void deleteTiketKeluarga(int id) {

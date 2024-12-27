@@ -57,4 +57,16 @@ public class TiketRegulerController {
     public void deleteTiketReguler(@PathVariable int id) {
         tiketRegulerService.deleteTiketReguler(id); // Delete the tiketreguler by ID
     }
+
+    // New endpoint to update the status
+    @PutMapping("/{id}/status")
+    public TiketReguler updateStatus(@PathVariable int id, @RequestParam String status) {
+        return tiketRegulerService.updateStatus(id, status);
+    }
+
+    // Endpoint to get TiketReguler by status
+    @GetMapping("/status/{status}")
+    public List<TiketReguler> getTiketRegulersByStatus(@PathVariable String status) {
+        return tiketRegulerService.getTiketRegulersByStatus(status);
+    }
 }

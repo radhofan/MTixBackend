@@ -8,8 +8,15 @@ import jakarta.persistence.*;
 public class TiketReguler extends Tiket{
 
     //////////////////////////////////////////////////////// Attributes
+    @Column(name = "status")
+    private String status; // New status variable
 
+    //////////////////////////////////////////////////////// Getters and Setters
+    public String getStatus() {
+        return status;
+    }
 
-    //////////////////////////////////////////////////////// Business Methods
-
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

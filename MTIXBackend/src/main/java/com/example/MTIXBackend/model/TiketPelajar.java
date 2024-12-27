@@ -10,6 +10,16 @@ public class TiketPelajar extends Tiket implements GroupTicket {
     //////////////////////////////////////////////////////// Attributes
     private String nama_sekolah;
     private int jumlah_orang;
+    @Column(name = "status")
+    private String status;
+    // Getters and Setters for 'status'
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     //////////////////////////////////////////////////////// Business Methods
     public void setGroupName(String name){

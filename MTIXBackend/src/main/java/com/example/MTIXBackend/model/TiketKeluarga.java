@@ -10,6 +10,7 @@ public class TiketKeluarga extends Tiket implements GroupTicket {
     //////////////////////////////////////////////////////// Attributes
     private String nama_keluarga;
     private int jumlah_orang;
+    private String status;
 
     //////////////////////////////////////////////////////// Business Methods
     public void setGroupName(String name){
@@ -29,4 +30,12 @@ public class TiketKeluarga extends Tiket implements GroupTicket {
 
     public void setNama_Sekolah(String nama_keluarga) {nama_keluarga = nama_keluarga;}
 
+    // Getter and Setter for `status`
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

@@ -54,6 +54,18 @@ public class TiketKeluargaController {
         return tiketKeluargaService.updateTiketKeluarga(tiketKeluarga); // Update the tiketkeluarga
     }
 
+    // update a ticketstatus
+    @PutMapping("/{id}/status")
+    public TiketKeluarga updateStatus(@PathVariable int id, @RequestParam String status) {
+        return tiketKeluargaService.updateStatus(id, status);
+    }
+
+    // Get tickets by status
+    @GetMapping("/status/{status}")
+    public List<TiketKeluarga> getTicketsByStatus(@PathVariable String status) {
+        return tiketKeluargaService.getTicketsByStatus(status);
+    }
+
     // Delete a tiketkeluarga by ID
     @DeleteMapping("/{id}")
     public void deleteTiketKeluarga(@PathVariable int id) {
