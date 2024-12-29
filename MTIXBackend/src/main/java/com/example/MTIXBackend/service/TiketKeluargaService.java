@@ -1,6 +1,7 @@
 package com.example.MTIXBackend.service;
 
 import com.example.MTIXBackend.model.TiketKeluarga;
+import com.example.MTIXBackend.model.TiketReguler;
 import com.example.MTIXBackend.repository.TiketKeluargaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,22 @@ public class TiketKeluargaService {
         tiketKeluarga.setMuseum(
                 museumService.getMuseumById(tiketKeluarga.getKeranjang().getMuseum().getMuseum_id())
         );
+        tiketKeluarga.setStatus("Upcoming");
+        tiketKeluarga.setJenis_tiket("Tiket Keluarga");
         return tiketKeluargaRepository.save(tiketKeluarga);
+    }
+
+    public List<TiketKeluarga> getTicketKeluargasByKeranjang(int keranjang_id) {
+        return tiketKeluargaRepository.findByKeranjangId(keranjang_id);
+    }
+
+    public TiketKeluarga cancelTicket(int id) {
+        TiketKeluarga tiketKeluarga = getTiketKeluargaById(id);
+        if (tiketKeluarga != null) {
+            tiketKeluarga.setStatus("Cancelled");
+            return tiketKeluargaRepository.save(tiketKeluarga);
+        }
+        return null;
     }
 
     //////////////////////////////////////////////////////// CRUD Methods

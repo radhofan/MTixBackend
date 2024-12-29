@@ -11,6 +11,7 @@ public class TiketPelajar extends Tiket implements GroupTicket {
     private String nama_sekolah;
     private int jumlah_orang;
 
+
     //////////////////////////////////////////////////////// Business Methods
     public void setGroupName(String name){
         this.nama_sekolah = name;
@@ -28,4 +29,5 @@ public class TiketPelajar extends Tiket implements GroupTicket {
     public String getNama_Sekolah() {return nama_sekolah;}
 
     public void setNama_Sekolah(String nama_sekolah) {nama_sekolah = nama_sekolah;}
+
 }

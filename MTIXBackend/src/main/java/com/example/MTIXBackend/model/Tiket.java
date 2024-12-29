@@ -24,6 +24,9 @@ public abstract class Tiket {
     @JoinColumn(name = "keranjang_id", referencedColumnName = "keranjang_id", nullable = false)
     private Keranjang keranjang;
 
+    private String status;
+    private String jenis_tiket;
+
     //////////////////////////////////////////////////////// Business Methods
 
     //////////////////////////////////////////////////////// Getter and Setter Methods
@@ -51,4 +54,20 @@ public abstract class Tiket {
 
     public void setKeranjang(Keranjang keranjang) {this.keranjang = keranjang;}
 
+    // Getters and Setters for 'status'
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getJenis_tiket() {
+        return jenis_tiket;
+    }
+
+    public void setJenis_tiket(String jenis_tiket) {
+        this.jenis_tiket = jenis_tiket;
+    }
 }

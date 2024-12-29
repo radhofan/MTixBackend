@@ -2,6 +2,7 @@ package com.example.MTIXBackend.controller;
 
 import com.example.MTIXBackend.model.TiketKeluarga;
 import com.example.MTIXBackend.model.TiketPelajar;
+import com.example.MTIXBackend.model.TiketReguler;
 import com.example.MTIXBackend.service.TiketPelajarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,18 @@ public class TiketPelajarController {
     @CrossOrigin(origins = "http://localhost:3000")
     public TiketPelajar createTiket(@PathVariable String nama_sekolah, @PathVariable int jumlah_orang, @RequestBody TiketPelajar tiketPelajar) {
         return tiketPelajarService.createTiket(nama_sekolah, jumlah_orang, tiketPelajar);
+    }
+
+    @GetMapping("/status/{keranjang_id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<TiketPelajar> getTiketPelajarsByKeranjang(@PathVariable int keranjang_id) {
+        return tiketPelajarService.getTiketPelajarsByKeranjang(keranjang_id);
+    }
+
+    @PostMapping("/status/cancel/{tiket_id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public TiketPelajar cancelTicket(@PathVariable int tiket_id) {
+        return tiketPelajarService.cancelTicket(tiket_id);
     }
 
     //////////////////////////////////////////////////////// CRUD Methods

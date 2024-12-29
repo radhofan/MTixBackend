@@ -1,6 +1,7 @@
 package com.example.MTIXBackend.controller;
 
 import com.example.MTIXBackend.model.TiketKeluarga;
+import com.example.MTIXBackend.model.TiketReguler;
 import com.example.MTIXBackend.repository.MuseumRepository;
 import com.example.MTIXBackend.service.MuseumService;
 import com.example.MTIXBackend.service.TiketKeluargaService;
@@ -27,6 +28,18 @@ public class TiketKeluargaController {
     @CrossOrigin(origins = "http://localhost:3000")
     public TiketKeluarga createTiket(@PathVariable String nama_keluarga, @PathVariable int jumlah_orang, @RequestBody TiketKeluarga tiketKeluarga) {
         return tiketKeluargaService.createTiket(nama_keluarga, jumlah_orang, tiketKeluarga);
+    }
+
+    @GetMapping("/status/{keranjang_id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<TiketKeluarga> getTicketsByKeranjang(@PathVariable int keranjang_id) {
+        return tiketKeluargaService.getTicketKeluargasByKeranjang(keranjang_id);
+    }
+
+    @PostMapping("/status/cancel/{tiket_id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public TiketKeluarga cancelTicket(@PathVariable int tiket_id) {
+        return tiketKeluargaService.cancelTicket(tiket_id);
     }
 
     //////////////////////////////////////////////////////// CRUD Methods

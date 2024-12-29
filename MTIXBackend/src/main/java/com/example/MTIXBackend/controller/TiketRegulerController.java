@@ -27,6 +27,18 @@ public class TiketRegulerController {
         return tiketRegulerService.createTiket(tiketReguler);
     }
 
+    @GetMapping("/status/{keranjang_id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<TiketReguler> getTiketRegulersByKeranjang(@PathVariable int keranjang_id) {
+        return tiketRegulerService.getTiketRegulersByKeranjang(keranjang_id);
+    }
+
+    @PostMapping("/status/cancel/{tiket_id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public TiketReguler cancelTicket(@PathVariable int tiket_id) {
+        return tiketRegulerService.cancelTicket(tiket_id);
+    }
+
     //////////////////////////////////////////////////////// CRUD Methods
     // Get all tiketregulers
     @GetMapping

@@ -26,10 +26,11 @@ public class KeranjangService {
     private final UserRepository userRepository;
 
     @Autowired
-    public KeranjangService(KeranjangRepository keranjangRepository, UserRepository userRepository, MuseumRepository museumRepository) {
+    public KeranjangService(KeranjangRepository keranjangRepository, UserRepository userRepository, MuseumRepository museumRepository, MuseumController museumController) {
         this.keranjangRepository = keranjangRepository;
         this.userRepository = userRepository;
         this.museumRepository = museumRepository;
+        this.museumController = museumController;
     }
 
     //////////////////////////////////////////////////////// Continued Business Methods
@@ -49,6 +50,7 @@ public class KeranjangService {
         if (currentKeranjang != null) {
             currentKeranjang.setJumlah_tiket(updatedKeranjang.getJumlah_tiket());
             currentKeranjang.setJenis_tiket(updatedKeranjang.getJenis_tiket());
+            currentKeranjang.setMuseum(updatedKeranjang.getMuseum());
 
             Integer museumId = currentKeranjang.getMuseum().getMuseum_id();
             Map<String, Integer> requestBody = new HashMap<>();

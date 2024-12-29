@@ -27,7 +27,22 @@ public class TiketRegulerService {
         tiketReguler.setMuseum(
                 museumService.getMuseumById(tiketReguler.getKeranjang().getMuseum().getMuseum_id())
         );
+        tiketReguler.setStatus("Upcoming");
+        tiketReguler.setJenis_tiket("Tiket Reguler");
         return tiketRegulerRepository.save(tiketReguler);
+    }
+
+    public List<TiketReguler> getTiketRegulersByKeranjang(int keranjang_id) {
+        return tiketRegulerRepository.findByKeranjangId(keranjang_id);
+    }
+
+    public TiketReguler cancelTicket(int id) {
+        TiketReguler tiketReguler = getTiketRegulerById(id);
+        if (tiketReguler != null) {
+            tiketReguler.setStatus("Cancelled");
+            return tiketRegulerRepository.save(tiketReguler);
+        }
+        return null;
     }
 
     //////////////////////////////////////////////////////// CRUD Methods

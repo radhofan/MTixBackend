@@ -17,7 +17,7 @@ public class User {
     private String password;
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "keranjang_id")
     private Keranjang keranjang;
 
