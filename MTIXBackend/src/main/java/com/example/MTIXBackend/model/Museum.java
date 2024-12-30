@@ -13,15 +13,28 @@ public class Museum {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int museum_id;
 
+    @Column(nullable = false)
     private String nama;
+
     private String lokasi;
     private String no_telpon;
     private String keterangan;
     private double rating;
-    private int jumlah_tiket;
+    private int jumlah_tiket = 100;
+
+    @Column(nullable = false)
     private int tiket_reguler_price;
+
+    @Column(nullable = false)
     private int tiket_pelajar_price;
+
+    @Column(nullable = false)
     private int tiket_keluarga_price;
+
+    private int likes = 1000;
+    private String jam_operasional;
+    private String longitude;
+    private String latitude;
 
     //////////////////////////////////////////////////////// Getter and Setter Methods
     public int getMuseum_id() {
@@ -91,4 +104,36 @@ public class Museum {
     public int getTiket_keluarga_price() {return tiket_keluarga_price;}
 
     public void setTiket_keluarga_price(int tiket_keluarga_price) {this.tiket_keluarga_price = tiket_keluarga_price;}
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public String getJam_operasional() {
+        return jam_operasional;
+    }
+
+    public void setJam_operasional(String jam_operasional) {
+        this.jam_operasional = jam_operasional;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
 }

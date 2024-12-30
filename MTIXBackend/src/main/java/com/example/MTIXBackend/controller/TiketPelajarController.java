@@ -24,19 +24,16 @@ public class TiketPelajarController {
 
     //////////////////////////////////////////////////////// Business Methods
     @PostMapping("/createTicket/{nama_sekolah}/{jumlah_orang}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public TiketPelajar createTiket(@PathVariable String nama_sekolah, @PathVariable int jumlah_orang, @RequestBody TiketPelajar tiketPelajar) {
         return tiketPelajarService.createTiket(nama_sekolah, jumlah_orang, tiketPelajar);
     }
 
     @GetMapping("/status/{keranjang_id}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public List<TiketPelajar> getTiketPelajarsByKeranjang(@PathVariable int keranjang_id) {
         return tiketPelajarService.getTiketPelajarsByKeranjang(keranjang_id);
     }
 
     @PostMapping("/status/cancel/{tiket_id}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public TiketPelajar cancelTicket(@PathVariable int tiket_id) {
         return tiketPelajarService.cancelTicket(tiket_id);
     }

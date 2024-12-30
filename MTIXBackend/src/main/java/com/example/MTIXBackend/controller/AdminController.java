@@ -2,6 +2,7 @@ package com.example.MTIXBackend.controller;
 
 import com.example.MTIXBackend.model.Admin;
 import com.example.MTIXBackend.model.Museum;
+import com.example.MTIXBackend.model.User;
 import com.example.MTIXBackend.service.AdminService;
 import com.example.MTIXBackend.service.MuseumService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,18 @@ public class AdminController {
     @CrossOrigin(origins = "http://localhost:3000")
     public void deleteMuseum(@PathVariable int id) {
         museumService.deleteMuseum(id);
+    }
+
+    @PostMapping("/login")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Admin login(@RequestBody Admin admin) {
+        Admin authenticatedAdmin = adminService.authenticateAdmin(admin.getEmail(), admin.getPassword());
+
+        if (authenticatedAdmin == null) {
+            throw new RuntimeException("Invalid email or password");
+        }
+
+        return authenticatedAdmin;
     }
 
     //////////////////////////////////////////////////////// CRUD Methods

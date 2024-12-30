@@ -21,13 +21,11 @@ public class PaymentController {
 
     //////////////////////////////////////////////////////// Business Methods
     @PostMapping("/createPayment")
-    @CrossOrigin(origins = "http://localhost:3000")
     public Payment createPaymentUser(@RequestBody Payment payment) {
         return paymentService.createPayment(payment);
     }
 
     @GetMapping("viewUserHistory/{keranjang_id}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public List<Payment> viewUserHistory(@PathVariable int keranjang_id){
         return paymentService.viewUserHistory(keranjang_id);
     }
@@ -47,7 +45,6 @@ public class PaymentController {
 
     // Create a new payment
     @PostMapping("/create")
-    @CrossOrigin(origins = "http://localhost:3000")
     public Payment createPayment(@RequestBody Payment payment) {
         return paymentService.createPayment(payment); // Delegate to service for creating the payment
     }

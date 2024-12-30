@@ -29,13 +29,11 @@ public class ReviewController {
 
     //////////////////////////////////////////////////////// Business Methods
     @GetMapping("/getAllMuseumReviews/{museum_id}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public List<Review> getAllMuseumReviews(@PathVariable int museum_id) {
         return reviewService.getAllMuseumReviews(museum_id);
     }
 
     @PostMapping("/addReview/{museum_id}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public Review addReview(@RequestBody Review review, @PathVariable int museum_id) {
         return reviewService.addReview(review, museum_id);
     }

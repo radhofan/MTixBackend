@@ -6,8 +6,10 @@ import com.example.MTIXBackend.controller.KeranjangController;
 import com.example.MTIXBackend.model.User;
 import com.example.MTIXBackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,18 +30,29 @@ public class UserController {
 
     //////////////////////////////////////////////////////// Business Methods
     @PostMapping("/registrasi")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public User registrasi(@RequestBody User user) {
+    public ResponseEntity<?> registrasi(@RequestBody User user) {
+        // Check if user with the same email already exists
+        if (userService.existsByEmail(user.getEmail())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(Collections.singletonMap("message", "Email is already in use"));
+        }
+
+        // Create a new Keranjang for the user
         Keranjang newKeranjang = new Keranjang();
         newKeranjang = keranjangController.createKeranjangUser(newKeranjang);
 
+        // Set the Keranjang for the user
         user.setKeranjang(newKeranjang);
 
-        return userService.createUser(user);
+        // Create the user
+        User createdUser = userService.createUser(user);
+
+        // Return the created user
+        return ResponseEntity.ok(createdUser);
     }
 
     @PostMapping("/login")
-    @CrossOrigin(origins = "http://localhost:3000")
     public User login(@RequestBody User user) {
         User authenticatedUser = userService.authenticateUser(user.getEmail(), user.getPassword());
 
@@ -65,7 +78,6 @@ public class UserController {
 
     // Create a new user
     @PostMapping("/create")
-    @CrossOrigin(origins = "http://localhost:3000")
     public User createUser(@RequestBody User user) {
         // First create the Keranjang
         Keranjang newKeranjang = new Keranjang();

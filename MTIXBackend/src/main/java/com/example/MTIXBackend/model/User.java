@@ -11,29 +11,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
 
+    @Column(nullable = false)
     private String nama;
+
     private String no_telpon;
     private String alamat;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false, unique = true)
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "keranjang_id")
     private Keranjang keranjang;
-
-    // Default constructor (No-args)
-    public User() {
-    }
-
-    // Parameterized constructor (With Keranjang)
-    public User(String nama, String no_telpon, String alamat, String password, String email, Keranjang keranjang) {
-        this.nama = nama;
-        this.no_telpon = no_telpon;
-        this.alamat = alamat;
-        this.password = password;
-        this.email = email;
-        this.keranjang = keranjang;
-    }
 
     //////////////////////////////////////////////////////// Getter and Setter Methods
     public int getUser_id() {

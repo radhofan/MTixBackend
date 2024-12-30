@@ -21,19 +21,16 @@ public class KeranjangController {
 
     //////////////////////////////////////////////////////// Business Methods
     @PostMapping("/createKeranjang")
-    @CrossOrigin(origins = "http://localhost:3000")
     public Keranjang createKeranjangUser(@RequestBody Keranjang keranjang) {
         return keranjangService.createKeranjang(keranjang);
     }
 
     @GetMapping("/getKeranjang/{userId}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public Keranjang getKeranjangUser(@PathVariable int userId) {
         return keranjangService.getKeranjangForUser(userId);
     }
 
     @PutMapping("/updateKeranjang/{userId}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public Keranjang updateKeranjangUser(@PathVariable int userId, @RequestBody Keranjang updatedKeranjang) {
         return keranjangService.updateKeranjangForUser(userId, updatedKeranjang);
     }

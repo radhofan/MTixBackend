@@ -37,6 +37,10 @@ public class UserService {
         throw new RuntimeException("Invalid email or password");  // Throw an exception for invalid credentials
     }
 
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
     //////////////////////////////////////////////////////// CRUD Methods
     public List<User> getAllUsers() {
         return userRepository.findAll();
