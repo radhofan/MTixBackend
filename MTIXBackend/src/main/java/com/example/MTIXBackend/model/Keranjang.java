@@ -20,19 +20,6 @@ public class Keranjang {
     @JoinColumn(name = "museum_id", unique = false)  // Disable uniqueness
     private Museum museum;
 
-    //////////////////////////////////////////////////////// Business Methods
-    public void addTiket(){
-
-    }
-
-    public void removeTiket(){
-
-    }
-
-    public void calculateTotal(){
-
-    }
-
     //////////////////////////////////////////////////////// Getter and Setter Methods
     public int getKeranjang_id() {
         return keranjang_id;

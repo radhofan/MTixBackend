@@ -3,7 +3,7 @@ package com.example.MTIXBackend.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user") // Optional, customize table name if needed
+@Table(name = "user")
 public class User {
 
     //////////////////////////////////////////////////////// Attributes
@@ -21,17 +21,18 @@ public class User {
     @JoinColumn(name = "keranjang_id")
     private Keranjang keranjang;
 
-    public Keranjang viewKeranjang() {
-        return this.keranjang;  // Return the associated Keranjang object
+    // Default constructor (No-args)
+    public User() {
     }
 
-    //////////////////////////////////////////////////////// Business Methods
-    public void checkout() {
-
-    }
-
-    public void viewHistory() {
-
+    // Parameterized constructor (With Keranjang)
+    public User(String nama, String no_telpon, String alamat, String password, String email, Keranjang keranjang) {
+        this.nama = nama;
+        this.no_telpon = no_telpon;
+        this.alamat = alamat;
+        this.password = password;
+        this.email = email;
+        this.keranjang = keranjang;
     }
 
     //////////////////////////////////////////////////////// Getter and Setter Methods
@@ -79,4 +80,7 @@ public class User {
 
     public Keranjang getKeranjang() {return keranjang;}
 
+    public Keranjang viewKeranjang() {
+        return this.keranjang;
+    }
 }

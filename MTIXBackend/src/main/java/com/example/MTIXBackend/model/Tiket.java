@@ -2,6 +2,8 @@ package com.example.MTIXBackend.model;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
+
 @MappedSuperclass
 public abstract class Tiket {
 
@@ -26,8 +28,8 @@ public abstract class Tiket {
 
     private String status;
     private String jenis_tiket;
+    private Date tanggal_kunjungan;
 
-    //////////////////////////////////////////////////////// Business Methods
 
     //////////////////////////////////////////////////////// Getter and Setter Methods
     public int getTiket_id() {
@@ -54,20 +56,19 @@ public abstract class Tiket {
 
     public void setKeranjang(Keranjang keranjang) {this.keranjang = keranjang;}
 
-    // Getters and Setters for 'status'
-    public String getStatus() {
-        return status;
+    public String getStatus() {return status;}
+
+    public void setStatus(String status) {this.status = status;}
+
+    public String getJenis_tiket() {return jenis_tiket;}
+
+    public void setJenis_tiket(String jenis_tiket) {this.jenis_tiket = jenis_tiket;}
+
+    public Date getTanggal_kunjungan() {
+        return tanggal_kunjungan;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getJenis_tiket() {
-        return jenis_tiket;
-    }
-
-    public void setJenis_tiket(String jenis_tiket) {
-        this.jenis_tiket = jenis_tiket;
+    public void setTanggal_kunjungan(Date tanggal_kunjungan) {
+        this.tanggal_kunjungan = tanggal_kunjungan;
     }
 }

@@ -14,7 +14,6 @@ public class PaymentController {
     //////////////////////////////////////////////////////// Attributes and Contructors
     private final PaymentService paymentService;
 
-    // Inject PaymentService into the controller using constructor-based dependency injection
     @Autowired
     public PaymentController(PaymentService paymentService) {
         this.paymentService = paymentService;
@@ -25,6 +24,12 @@ public class PaymentController {
     @CrossOrigin(origins = "http://localhost:3000")
     public Payment createPaymentUser(@RequestBody Payment payment) {
         return paymentService.createPayment(payment);
+    }
+
+    @GetMapping("viewUserHistory/{keranjang_id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<Payment> viewUserHistory(@PathVariable int keranjang_id){
+        return paymentService.viewUserHistory(keranjang_id);
     }
 
     //////////////////////////////////////////////////////// CRUD Methods

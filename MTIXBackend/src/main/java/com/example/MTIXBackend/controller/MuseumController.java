@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/museums") // Define base URL for Museum-related operations
+@RequestMapping("/museums")
 public class MuseumController {
 
     /// ///////////////////////////////////////////////////// Attributes and Contructors
@@ -39,35 +39,35 @@ public class MuseumController {
     @GetMapping("/get")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<Museum> getAllMuseums() {
-        return museumService.getAllMuseums(); // Delegate to the service layer
+        return museumService.getAllMuseums();
     }
 
     // Get a museum by ID
     @GetMapping("/get/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public Museum getMuseumById(@PathVariable int id) {
-        return museumService.getMuseumById(id); // Get museum by ID
+        return museumService.getMuseumById(id);
     }
 
     // Create a new museum
     @PostMapping("/create")
     @CrossOrigin(origins = "http://localhost:3000")
     public Museum createMuseum(@RequestBody Museum museum) {
-        return museumService.createMuseum(museum); // Delegate to service for creating the museum
+        return museumService.createMuseum(museum);
     }
 
     // Update a museum by ID
     @PutMapping("/update/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public Museum updateMuseum(@PathVariable int id, @RequestBody Museum museum) {
-        museum.setMuseum_id(id); // Set the ID in the museum object
-        return museumService.updateMuseum(museum); // Update the museum
+        museum.setMuseum_id(id);
+        return museumService.updateMuseum(museum);
     }
 
     // Delete a museum by ID
     @DeleteMapping("/delete/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public void deleteMuseum(@PathVariable int id) {
-        museumService.deleteMuseum(id); // Delete the museum by ID
+        museumService.deleteMuseum(id);
     }
 }

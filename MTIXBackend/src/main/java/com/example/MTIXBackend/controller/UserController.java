@@ -47,7 +47,6 @@ public class UserController {
             throw new RuntimeException("Invalid email or password");
         }
 
-        authenticatedUser.setKeranjang(null);
         return authenticatedUser;
     }
 

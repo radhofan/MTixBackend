@@ -14,19 +14,6 @@ public class Admin {
 
     private String nama;
 
-    //////////////////////////////////////////////////////// Business Methods
-    public void addMuseum(){
-
-    }
-
-    public void editMuseum(){
-
-    }
-
-    public void deleteMuseum(){
-
-    }
-
     //////////////////////////////////////////////////////// Getter and Setter Methods
     public int getAdmin_id() { return admin_id; }
 

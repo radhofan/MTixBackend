@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/keranjangs") // Define base URL for Keranjang-related operations
+@RequestMapping("/keranjangs")
 public class KeranjangController {
 
     //////////////////////////////////////////////////////// Attributes and Contructors
@@ -29,27 +29,27 @@ public class KeranjangController {
     @GetMapping("/getKeranjang/{userId}")
     @CrossOrigin(origins = "http://localhost:3000")
     public Keranjang getKeranjangUser(@PathVariable int userId) {
-        return keranjangService.getKeranjangForUser(userId); // Call the service to get the Keranjang
+        return keranjangService.getKeranjangForUser(userId);
     }
 
     @PutMapping("/updateKeranjang/{userId}")
     @CrossOrigin(origins = "http://localhost:3000")
     public Keranjang updateKeranjangUser(@PathVariable int userId, @RequestBody Keranjang updatedKeranjang) {
-        return keranjangService.updateKeranjangForUser(userId, updatedKeranjang); // Call the service to update the Keranjang
+        return keranjangService.updateKeranjangForUser(userId, updatedKeranjang);
     }
 
     //////////////////////////////////////////////////////// CRUD Methods
     // Get all keranjangs
     @GetMapping
     public List<Keranjang> getAllKeranjangs() {
-        return keranjangService.getAllKeranjangs(); // Delegate to the service layer
+        return keranjangService.getAllKeranjangs();
     }
 
     // Get a keranjang by ID
     @GetMapping("/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public Keranjang getKeranjangById(@PathVariable int id) {
-        return keranjangService.getKeranjangById(id); // Get keranjang by ID
+        return keranjangService.getKeranjangById(id);
     }
 
     // Create a new keranjang
@@ -62,12 +62,12 @@ public class KeranjangController {
     @PutMapping
     @CrossOrigin(origins = "http://localhost:3000")
     public Keranjang updateKeranjang(@RequestBody Keranjang keranjang) {
-        return keranjangService.updateKeranjang(keranjang); // Update the keranjang
+        return keranjangService.updateKeranjang(keranjang);
     }
 
     // Delete a keranjang by ID
     @DeleteMapping("/{id}")
     public void deleteKeranjang(@PathVariable int id) {
-        keranjangService.deleteKeranjang(id); // Delete the keranjang by ID
+        keranjangService.deleteKeranjang(id);
     }
 }

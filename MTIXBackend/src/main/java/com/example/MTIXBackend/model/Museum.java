@@ -10,7 +10,7 @@ public class Museum {
 
     //////////////////////////////////////////////////////// Attributes
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate user_id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int museum_id;
 
     private String nama;
@@ -22,15 +22,6 @@ public class Museum {
     private int tiket_reguler_price;
     private int tiket_pelajar_price;
     private int tiket_keluarga_price;
-
-    //////////////////////////////////////////////////////// Business Methods
-    public void viewDetails(){
-
-    }
-
-    public void rateMuseum(){
-
-    }
 
     //////////////////////////////////////////////////////// Getter and Setter Methods
     public int getMuseum_id() {
@@ -89,27 +80,15 @@ public class Museum {
         this.no_telpon = no_telpon;
     }
 
-    public int getTiket_reguler_price() {
-        return tiket_reguler_price;
-    }
+    public int getTiket_reguler_price() {return tiket_reguler_price;}
 
-    public void setTiket_reguler_price(int tiket_reguler_price) {
-        this.tiket_reguler_price = tiket_reguler_price;
-    }
+    public void setTiket_reguler_price(int tiket_reguler_price) {this.tiket_reguler_price = tiket_reguler_price;}
 
-    public int getTiket_pelajar_price() {
-        return tiket_pelajar_price;
-    }
+    public int getTiket_pelajar_price() {return tiket_pelajar_price;}
 
-    public void setTiket_pelajar_price(int tiket_pelajar_price) {
-        this.tiket_pelajar_price = tiket_pelajar_price;
-    }
+    public void setTiket_pelajar_price(int tiket_pelajar_price) {this.tiket_pelajar_price = tiket_pelajar_price;}
 
-    public int getTiket_keluarga_price() {
-        return tiket_keluarga_price;
-    }
+    public int getTiket_keluarga_price() {return tiket_keluarga_price;}
 
-    public void setTiket_keluarga_price(int tiket_keluarga_price) {
-        this.tiket_keluarga_price = tiket_keluarga_price;
-    }
+    public void setTiket_keluarga_price(int tiket_keluarga_price) {this.tiket_keluarga_price = tiket_keluarga_price;}
 }

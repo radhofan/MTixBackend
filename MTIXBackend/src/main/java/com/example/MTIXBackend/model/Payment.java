@@ -19,29 +19,20 @@ public class Payment {
     private String bank;
 
     @ManyToOne
-    @JoinColumn(name = "keranjang_id")  // Foreign key in Payment table
+    @JoinColumn(name = "museum_id")
+    private Museum museum;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "keranjang_id")
     private Keranjang keranjang;
 
     private double total_harga;
     private int jumlah_tiket;
     private String jenis_tiket;
-
-    //////////////////////////////////////////////////////// Business Methods
-    public void processPayment(){
-
-    }
-
-    public void confirmPayment(){
-
-    }
-
-    public void cancelPayment(){
-
-    }
-
-    public void paymentStatus(){
-
-    }
 
     //////////////////////////////////////////////////////// Getter and Setter Methods
     public int getPayment_id() {return payment_id;}
@@ -79,4 +70,20 @@ public class Payment {
     public String getJenis_tiket() {return jenis_tiket;}
 
     public void setJenis_tiket(String jenis_tiket) {this.jenis_tiket = jenis_tiket;}
+
+    public Museum getMuseum() {
+        return museum;
+    }
+
+    public void setMuseum(Museum museum) {
+        this.museum = museum;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

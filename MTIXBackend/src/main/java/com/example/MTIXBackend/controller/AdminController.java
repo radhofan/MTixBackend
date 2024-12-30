@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admins") // Define base URL for Admin-related operations
+@RequestMapping("/admins")
 public class AdminController {
 
     //////////////////////////////////////////////////////// Attributes and Contructors
@@ -48,31 +48,31 @@ public class AdminController {
     //////////////////////////////////////////////////////// CRUD Methods
     @GetMapping
     public List<Admin> getAllAdmins() {
-        return adminService.getAllAdmins(); // Delegate to the service layer
+        return adminService.getAllAdmins();
     }
 
     // Get an admin by ID
     @GetMapping("/{id}")
     public Admin getAdminById(@PathVariable int id) {
-        return adminService.getAdminById(id); // Get admin by ID
+        return adminService.getAdminById(id);
     }
 
     // Create a new admin
     @PostMapping
     public Admin createAdmin(@RequestBody Admin admin) {
-        return adminService.createAdmin(admin); // Delegate to service for creating the admin
+        return adminService.createAdmin(admin);
     }
 
     // Update an admin by ID
     @PutMapping("/{id}")
     public Admin updateAdmin(@PathVariable int id, @RequestBody Admin admin) {
-        admin.setAdmin_id(id); // Set the ID in the admin object
-        return adminService.updateAdmin(admin); // Update the admin
+        admin.setAdmin_id(id);
+        return adminService.updateAdmin(admin);
     }
 
     // Delete an admin by ID
     @DeleteMapping("/{id}")
     public void deleteAdmin(@PathVariable int id) {
-        adminService.deleteAdmin(id); // Delete the admin by ID
+        adminService.deleteAdmin(id);
     }
 }

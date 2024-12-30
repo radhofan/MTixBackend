@@ -31,8 +31,6 @@ public class UserService {
         User user = userRepository.findByEmail(email);  // Find user by email
 
         if (user != null && user.getPassword().equals(password)) {  // Check if the password matches
-            // Remove the reference to Keranjang before returning the User object
-            user.setKeranjang(null);
             return user;  // Return the User object without Keranjang
         }
 
